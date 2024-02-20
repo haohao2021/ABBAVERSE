@@ -105,4 +105,36 @@ body, html {
       height: 300px; /* Fixed height for small screens, adjust as necessary */
     }
   }
-  
+
+ /* 地图容器样式 */
+#map svg {
+  width: 100%;
+  height: 100%;
+  background-color: #3a3a3a; /* 设置地图背景颜色 */
+  position: absolute;
+}
+
+/* 国家路径基本样式 */
+#map svg g path {
+  -webkit-transition: fill 0.4s ease-in-out; /* 平滑过渡填充颜色变化 */
+  transition: fill 0.4s ease-in-out;
+}
+
+/* 默认国家样式 */
+#map svg .defaultCountry {
+  fill: #121212; /* 国家默认填充颜色 */
+  stroke: #b3b3b3; /* 国家边界颜色 */
+  stroke-width: 0.1; /* 国家边界宽度 */
+}
+
+/* 高亮国家样式 */
+#map svg .countryHighlight {
+  stroke: rgba(255, 255, 255, 0.7); /* 高亮国家边界颜色 */
+  stroke-width: 1; /* 高亮国家边界宽度 */
+  fill: none; /* 不填充高亮国家 */
+}
+
+/* 当前数据包含的国家样式 */
+#map svg .countryIsInCurrentData {
+  stroke: #121212; /* 设置包含数据的国家边界颜色 */
+}

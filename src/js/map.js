@@ -39,6 +39,8 @@ Promise.all([
   //   .attr("stroke", "white");
 
   generateMap(jsonData[0]); 
+  // worldCountryZoomJSON = jsonData[2];
+  countryCCJSON = jsonData[1];
 
   /* map map zoom */
   var zoom = d3
@@ -84,13 +86,13 @@ Promise.all([
       /* On Mouse Enter */
       .on("mouseover", function (d, i) {
         if (d3.select(this).classed("countryIsInCurrentData")) {
-          highlightCountryInList(d.id, true);
+          // highlightCountryInList(d.id, true);
           highlightCountryOnMap(d.id, true);
-          setTimeout(function () {
-            hideCountryTooltip();
-          }, 500);
-          tooltipRecent = true;
-          showCountryTooltip(d.id);
+          // setTimeout(function () {
+          //   hideCountryTooltip();
+          // }, 500);
+          // tooltipRecent = true;
+          // showCountryTooltip(d.id);
         } else {
           // country outside of data so tooltip shouldn't show
           hideCountryTooltip();
@@ -106,7 +108,7 @@ Promise.all([
       /* On Mouse Out */
       .on("mouseout", function (d, i) {
         if (d3.select(this).classed("countryIsInCurrentData")) {
-          highlightCountryInList(d.id, false);
+          // highlightCountryInList(d.id, false);
           highlightCountryOnMap(d.id, false);
         }
       });
@@ -116,30 +118,30 @@ Promise.all([
     return d3.select("." + CC)._groups[0][0] !== null;
   }
 
-  // function updateMap(data, minimum, maximum) {
-  //   var CCinData = Object.keys(data);
+window.updateMap = function(data, minimum, maximum) {
+    var CCinData = Object.keys(data);
 
-  //   d3.selectAll(".defaultCountry")
-  //     .classed("countryIsInCurrentData", false)
-  //     .style("fill", null)
-  //     .filter(function (d) {
-  //       return CCinData.indexOf(d.id) > -1;
-  //     })
-  //     .classed("countryIsInCurrentData", true)
-  //     .each(function (d) {
-  //       d3.select(this).style(
-  //         "fill",
-  //         calculateColorFromValue(
-  //           data[d.id][currentAttribute],
-  //           minimum[currentAttribute],
-  //           maximum[currentAttribute],
-  //           minColor,
-  //           maxColor
-  //         )
-  //       );
-  //     });
-  //   updateLegend(data, minimum, maximum);
-  // }
+    d3.selectAll(".defaultCountry")
+      .classed("countryIsInCurrentData", false)
+      .style("fill", null)
+      .filter(function (d) {
+        return CCinData.indexOf(d.id) > -1;
+      })
+      .classed("countryIsInCurrentData", true)
+      .each(function (d) {
+        d3.select(this).style(
+          "fill",
+          calculateColorFromValue(
+            data[d.id][currentAttribute],
+            minimum[currentAttribute],
+            maximum[currentAttribute],
+            minColor,
+            maxColor
+          )
+        );
+      });
+    // updateLegend(data, minimum, maximum);
+  }
 
   function handleCountryClickShowDetail(CC) {
     zoomInCountry(CC);
